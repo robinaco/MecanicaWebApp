@@ -1,0 +1,32 @@
+<!-- Div clase corazon contiene el caracter de un corazón-->
+<style>
+
+/* Animación con keyframe llamada "latidos" */
+@keyframes latidos {
+    from { transform: none; }
+    50% { transform: scale(1.4); }
+    to { transform: none; }
+}
+/* En la clase corazon vamos a llamar latidos en la animación  */
+.corazon {
+	display: inline-block;
+	font-size: 150px;
+	text-shadow: 0 0 10px #222,1px 1px  0 #450505;
+	color: red;
+	animation: latidos .5s infinite;
+	transform-origin: center;
+}
+
+body { text-align: center;
+  background: #333; height: 230px;
+}
+</style>
+
+
+
+<div class="corazon">&#x2665;</div>
+<!--
+Ver mayores detalles en:
+
+http://www.mundosica.com/blog/2013/animacion-de-corazon-css-usando-keyframe/
+-->
