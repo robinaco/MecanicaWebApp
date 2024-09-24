@@ -82,11 +82,11 @@ echo date('Y-m-d');
 @endphp
 
 <div class="margen">
-    <p class="text-center">
-        <b>JE Car Pro</b> <br>
-         Direccion: cra  91  # 44c - 65 <br>
-         Celular: 3216793525<br>
-         Medellin - Antioquia
+<p class="text-center">
+        <b>Omar Castaño</b> <br>
+         Direccion: calle 36 # 53B - 43<br>
+         Celular: 3046578518<br>
+         Itagui - Antioquia
     </p>
 <hr>                
     <h5 class="textos">Detalle Orden de Servicio # <br> {{ $numorden }}</h5>

@@ -74,11 +74,11 @@
 </head>
 <body>
     <p class="text-center">
-        <span class="imgsl"><img src="/images/logo.jpeg" width="50%"></span><br>
-        <b>JE Car Pro</b> <br>
-         Direccion: cra  91  # 44c - 65 <br>
-         Celular: 3216793525<br>
-         Medellin - Antioquia
+        <!-- <span class="imgsl"><img src="/images/logo.jpeg" width="50%"></span><br> -->
+        <b>Omar Castaño</b> <br>
+         Direccion: calle 36 # 53B - 43<br>
+         Celular: 3046578518<br>
+         Itagui - Antioquia
     </p>
 
 @php
