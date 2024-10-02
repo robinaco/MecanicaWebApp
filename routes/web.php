@@ -71,6 +71,7 @@ Route::get('/searchSales',[App\Http\Controllers\HomeController::class, 'searchSa
 Route::post('/buscarSales',[App\Http\Controllers\HomeController::class, 'buscarSales'])->name('buscarSales');
 Route::get('/{id}/Addorder', [App\Http\Controllers\HomeController::class, 'Addorder'])->name('Addorder');
 Route::post('/{id}/SaveOrder', [App\Http\Controllers\HomeController::class, 'SaveOrder'])->name('SaveOrder');
+Route::get('/{id}/newOwner', [App\Http\Controllers\HomeController::class, 'newOwner'])->name('newOwner');
 
 
 

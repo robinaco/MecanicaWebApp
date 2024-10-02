@@ -13,6 +13,7 @@
        <p>ADMINISTRACION</p>
    </a>
    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+   <!-- <li><a class="dropdown-item bg bg-warning" href="">Administrar Herramientas</a></li> -->
        <li><a class="dropdown-item bg bg-secondary" href="{{ route('MechanicList') }}">Listar Técnicos</a></li>
        <li><a class="dropdown-item bg bg-warning" href="{{ route('getliquidations') }}">Listar Liquidaciones</a></li>
        <li><a class="dropdown-item bg bg-secondary" href="{{ route('buscarTecnico') }}">Buscar por Técnico</a></li>

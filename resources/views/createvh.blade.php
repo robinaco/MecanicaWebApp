@@ -10,8 +10,20 @@
     <span class="imgsl"><img src="/images/coche.png"></span>
     <div class="card-body">
         
+        
         <i><span class="badge bg-danger bg-gradient">Campos marcados con * son obligatorios.</span></i>
         <div class="card border border-secondary mb-3" style="padding:1%">
+        <!-- <div class="col-sm-3 col-md-3 search-header">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control search-box " placeholder="Ingrese Placa" name="srch-term" id="srch-term">
+                        <div class="input-group-btn">
+                            <button class="btn btn-success btn-search" onclick="return ss();"><i class="fa fa-search"> </i> BUSCAR VEHICULO</button>
+                        </div>
+                    </div>
+                </form>
+            </div> 
+            <hr>-->
             <form class="row g-3" action="SaveVehiculo" method="POST">
                 <input type="hidden" value="{{$cliente->id}}" name="idcliente" id="idcliente">
                 @csrf
@@ -80,7 +92,7 @@
                 </div>
                 <div class="card-body">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-warning btn-sm">Registrar Vehiculo</button>
+                        <button type="submit" class="btn btn-warning btn-sm">Asignar Vehiculo</button>
                     </div>
                 </div>
 

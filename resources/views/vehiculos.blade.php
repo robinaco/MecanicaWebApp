@@ -73,7 +73,9 @@
                                         class="fas fa-pen"></span>
                                     Editar</a>
                                
-                                     
+                                    <a href="/{{ $item->id }}/newOwner" class="btn btn-secondary btn-sm" title="Nuevo Propietario"><span
+                                            class="fas fa-user"></span>
+                                         Add Nuevo Propietario</a>    
                                 <a href="/{{ $item->id }}/deletevehiculo" class="btn btn-danger btn-sm" title="Eliminar Vehiculo"><span
                                             class="fas fa-trash"></span>
                                         Borrar</a>

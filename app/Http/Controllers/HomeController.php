@@ -319,6 +319,21 @@ public function deletevehiculo($id)
         }
     }
     
+    public function newOwner($id)
+    {
+        try {
+            $vehiculo = vehicule::find($id);
+            return view('NewOwner', compact('vehiculo'));
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::error('se presentó un error al procesar los datos', [$th]);
+            return  $th;
+        }
+    }
+
+
+
+
     public function deleteEmployee($id){
         try {
             $mecanico = Mechanic::find($id);
