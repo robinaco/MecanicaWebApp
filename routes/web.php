@@ -71,11 +71,12 @@ Route::get('/searchSales',[App\Http\Controllers\HomeController::class, 'searchSa
 Route::post('/buscarSales',[App\Http\Controllers\HomeController::class, 'buscarSales'])->name('buscarSales');
 Route::get('/{id}/Addorder', [App\Http\Controllers\HomeController::class, 'Addorder'])->name('Addorder');
 Route::post('/{id}/SaveOrder', [App\Http\Controllers\HomeController::class, 'SaveOrder'])->name('SaveOrder');
-
-
-
-
-
+Route::get('/ToolList', [App\Http\Controllers\ToolController::class, 'ToolList'])->name('ToolList');
+Route::get('/createTool', [App\Http\Controllers\ToolController::class, 'createTool'])->name('createTool');
+Route::post('/SaveTool', [App\Http\Controllers\ToolController::class, 'SaveTool'])->name('SaveTool');
+Route::get('/{id}/deleteTool', [App\Http\Controllers\ToolController::class, 'deleteTool'])->name('deleteTool');
+Route::get('/{id}/editTool', [App\Http\Controllers\ToolController::class, 'editTool'])->name('editTool');
+Route::put('/{id}/UpdateTool', [App\Http\Controllers\ToolController::class, 'UpdateTool'])->name('UpdateTool');
 
 
 
