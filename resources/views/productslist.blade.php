@@ -22,9 +22,9 @@
     </style>
 </head>
 <body>
-<h4 class="text-black-50 text-center"><span class="badge badge bg-secondary bg-gradient">Listado Herramientas Registradas</span></h4>
+<h4 class="text-black-50 text-center"><span class="badge badge bg-success bg-gradient">Listado Productos Inventario</span></h4>
 
-<a href="/createTool" class="btn btn-secondary btn-sm">Crear Nueva Herramienta
+<a href="/createProduct" class="btn btn-success btn-sm">Crear Nuevo Producto
 
 </a>
     <hr>
@@ -40,41 +40,41 @@
                 </div>
             </div>
             <div id="no-more-tables">
-                <table class="col-md-12 table-hoover table-condensed cf" id="tools">
+                <table class="col-md-12 table-hoover table-condensed cf" id="products">
                     <thead class="cf thead-dark">
                         <tr>
-                            <th># ID Registro</th>
+                            <th>Cod. Producto</th>
                             <th>Categoria</th>
-                            <th>Descripción herramienta</th>
+                            <th>Descripción Producto</th>
                             <th>Cantidad</th>
-                            <th>Valor Compra</th>
-                            <th>Valor Comercial</th>
+                            <th>Valor Neto</th>
+                            <th>Valor Venta</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($tools as $item)
+                        @foreach ($products as $item)
                         <tr>
-                            <td  data-title="# Registro"><span class="fas fa-tools"></span> {!! $item->id !!}</td>
-                            <td  data-title="Categoria">{!! $item->categoriaherramienta !!}</td>
-                            <td  data-title="Descripcion">{!! $item->descripcionherramienta !!}</td>
-                            <td  data-title="Cantidad">{!! $item->cantidad !!}</td>
+                            <td  data-title="# Registro"><span class="fas fa-product"></span> {!! $item->codigoproducto !!}</td>
+                            <td  data-title="Categoria">{!! $item->categoriaproducto !!}</td>
+                            <td  data-title="Descripcion">{!! $item->descripcionproducto !!}</td>
+                            <td  data-title="Cantidad">{!! $item->cantidadproducto !!}</td>
                             <td  data-title="Valor Compra"><b>$</b>
                                 @php echo
-                                         number_format($item->valorcompraneto ,0);
+                                         number_format($item->valornetounidad ,0);
                                 @endphp
                             </td>
                             <td  data-title="Valor Venta"><b>$</b>
                                 @php echo
-                                         number_format($item->valorventa ,0);
+                                         number_format($item->valorventacomercial,0);
                                 @endphp
                             </td>
                              <td  data-title="Acciones">
-                                <a href="/{{ $item->id }}/editTool" class="btn btn-secondary btn-sm" title="Editar información"><span
-                                        class="fas fa-pen"></span> Editar Herramienta
+                                <a href="/{{ $item->id }}/editProduct" class="btn btn-secondary btn-sm" title="Editar Información"><span
+                                        class="fas fa-pen"></span> Editar Producto
                                 </a>
-                                <a href="/{{ $item->id }}/deleteTool" class="btn btn-danger btn-sm" title="Borrar Herramienta"><span
-                                    class="fas fa-trash"></span> Borrar Herramienta
+                                <a href="/{{ $item->id }}/deleteProduct" class="btn btn-danger btn-sm" title="Borrar Producto"><span
+                                    class="fas fa-trash"></span> Borrar Producto
                                 </a>
                             </td>
                         </tr>
@@ -92,7 +92,7 @@
         $('#txtbusca').on('keyup', function () {
     var value = $(this).val();
     var patt = new RegExp(value, "i");
-    $('#tools').find('tr').each(function () {
+    $('#products').find('tr').each(function () {
         if (!($(this).find('td').text().search(patt) >= 0)) {
             $(this).not('.titulos_tabla').hide();
         }

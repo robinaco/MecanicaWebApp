@@ -13,7 +13,7 @@
 </head>
 <body>
     
-<h4 class="text-black-50 text-center"><span class="badge badge bg-secondary bg-gradient">Registrar Nueva Herramienta</span></h4>
+<h4 class="text-black-50 text-center"><span class="badge badge bg-secondary bg-gradient">Actualizar Información</span></h4>
 
 <a href="/ToolList" class="btn btn-secondary btn-sm"> << Atras</a>
 <hr>

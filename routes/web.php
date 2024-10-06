@@ -77,6 +77,12 @@ Route::post('/SaveTool', [App\Http\Controllers\ToolController::class, 'SaveTool'
 Route::get('/{id}/deleteTool', [App\Http\Controllers\ToolController::class, 'deleteTool'])->name('deleteTool');
 Route::get('/{id}/editTool', [App\Http\Controllers\ToolController::class, 'editTool'])->name('editTool');
 Route::put('/{id}/UpdateTool', [App\Http\Controllers\ToolController::class, 'UpdateTool'])->name('UpdateTool');
+Route::get('/ProductList', [App\Http\Controllers\ProductController::class, 'ProductList'])->name('ProductList');
+Route::get('/createProduct', [App\Http\Controllers\ProductController::class, 'createProduct'])->name('createProduct');
+Route::post('/SaveProduct', [App\Http\Controllers\ProductController::class, 'SaveProduct'])->name('SaveProduct');
+Route::get('/{id}/deleteProduct', [App\Http\Controllers\ProductController::class, 'deleteProduct'])->name('deleteProduct');
+Route::get('/{id}/editProduct', [App\Http\Controllers\ProductController::class, 'editProduct'])->name('editProduct');
+Route::put('/{id}/UpdateProduct', [App\Http\Controllers\ProductController::class, 'UpdateProduct'])->name('UpdateProduct');
 
 
 

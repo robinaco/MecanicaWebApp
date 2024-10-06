@@ -19,9 +19,9 @@
 @include("notification")
 @include("advertisement")
 <div class="card bg-ligth bg-gradient border border-secondary">
+<span class="imgsl"><img src="/images/tool-box.png"></span>
     <div class="card-body">
-        <h1><span class="badge badge-secondary"><i class="nav-icon fas fa-tools"></i></span></h1>
-        <i><span class="badge bg-danger bg-gradient">Campos marcados con * son obligatorios.</span></i>
+    <i><span class="badge bg-danger bg-gradient">Campos marcados con * son obligatorios.</span></i>
         <div class="card border border-secondary mb-3" style="padding:1%">
             <form class="row g-3" action="SaveTool" method="POST">
                 @csrf
