@@ -32,6 +32,7 @@
                         <option value="ACEITES" {{ old('categoriaproduct')=='ACEITES' ? 'selected' : '' }}>ACEITES</option>
                         <option value="ACCESORIOS" {{ old('categoriaproduct')=='ACCESORIOS' ? 'selected' : '' }}>
                         ACCESORIOS</option>
+                        
                         <option value="REPUESTOS MECANICOS" {{ old('categoriaproduct')=='REPUESTOS MECANICOS' ? 'selected' : '' }}>
                         REPUESTOS MECANICOS</option>
                         <option value="REPUESTOS ELECTRICOS" {{ old('categoriaproduct')=='REPUESTOS ELECTRICOS' ? 'selected' : '' }}>

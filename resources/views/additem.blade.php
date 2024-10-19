@@ -96,8 +96,9 @@
                                             <tr class="bg bg-success">
                                                 <th>Servicio</th>
                                                 <th>Descripción Servicio</th>
-                                                <th>Cantidad</th>
+                                                <th>Producto Utilizado</th> 
                                                 <th>Precio Unitario</th>
+                                                <th>Cantidad Utilizada</th>
                                                 <th>Subtotal</th>
                                                 <th>Acciones</th>
                                             </tr>
@@ -164,54 +165,108 @@
 
 
 
+<script type="text/javascript">
 
-        <script type="text/javascript">
-            $('#registrar').attr('disabled', true);
-        
-                function agregarProducto() {
-                    
-                    $('#abono').val('');
-                    $('#resta').val('');
-                    var sel = $('#pro_id').find(':selected').val(); //Capturo el Value del Producto
-                    var text = $('#pro_id').find(':selected').text();
-                    var sptext = text.split();
-                    var newtr = '<tr class="item">';
-                    newtr = newtr + '<td class="iProduct"><input type="hidden" value="{{$orden}}" name="odsl[]" id="odsl" class="form-control" readonly><input type="hidden" value="{{$car}}" name="idvehiculo[]" id="idvehiculo"class="form-control" readonly> <select name="pro_id[]" id="pro_id" class="selectpicker form-control border border-warning border-gradient border-gradient" style="background-color:whitesmoke">'
-                    newtr = newtr +  '<option value="Mecanica General"><b>Mecanica General</b>'
-                    newtr = newtr +  '</option>'
-                    newtr = newtr +  '<option value="Cambio Aceite"><b>Cambio Aceite</b></option>'
-                    newtr = newtr + '<option value="Lavado Vehiculo"><b>Lavado Vehiculo</b></option>'
-                    newtr = newtr + '</select></td>';
-                    newtr = newtr + '<td><input class="form-control border border-success border-gradient border-gradient" type="text"  min="1" id="concept[]" name="concept[]"/></td>';
-                    newtr = newtr + '<td><input class="form-control border border-warning border-gradient border-gradient" type="number" min="1" id="cantidad[]" name="cantidad[]" onChange="Calcular(this);" value="1" /></td>';
-                    newtr = newtr + '<td><input class="form-control border border-warning border-gradient border-gradient" type="number" min="1" id="precunit[]" name="precunit[]" onChange="Calcular(this);" value="0"/></td>';
-                    newtr = newtr + '<td><input class="form-control border border-warning border-gradient border-gradient" type="text" id="totalitem[]" name="totalitem[]" readonly /></td>';
-                    newtr = newtr + '<td><button type="button" class="btn btn-danger btn-sm remove-item" ><i class="fa fa-times" title="Borrar Item"></i></button> <button type="button" onclick="agregarProducto()" class="btn btn-primary btn-sm" title="Agregar Item"><i class="fa fa-plus"></i></button></td></tr>';
-                    $('#ProSelected').append(newtr); //Agrego el Producto al tbody de la Tabla con el id=ProSelected
-                    RefrescaProducto(); //Refresco Productos
-                    $('.remove-item').off().click(function(e) {
-                    location.reload(true);
-                    var total = document.getElementById("total");
-                    total.innerHTML = parseFloat(total.innerHTML) - parseFloat(this.parentNode.parentNode.childNodes[3].childNodes[0].value);
-                    document.getElementById('costo').value = total.innerHTML; 
-                    $(this).parent('td').parent('tr').remove(); //Accion para eliminar el Producto de la Tabla Dinamica.
-                    if ($('#ProSelected tr.item').length == 0)
-                        $('#ProSelected .no-item').slideDown(300);
-                        $('#abono').val('');
-                        $('#resta').val('');
-                    RefrescaProducto();
-                Calcular(e.target);
-                });
-                $('.iProduct').off().change(function(e) {
-                RefrescaProducto();
-                });
-            }
+
+
+$('#registrar').attr('disabled', true);
+function agregarProducto() {
+    $('#abono').val('');
+    $('#resta').val('');
+    var sel = $('#pro_id').find(':selected').val(); //Capturo el Value del Producto
+    var text = $('#pro_id').find(':selected').text();
+    var sptext = text.split();
+    var newtr = '<tr class="item">';
+    newtr = newtr + '<td class="iProduct"><input type="hidden" value="{{$orden}}" name="odsl[]" id="odsl" class="form-control" readonly><input type="hidden" value="{{$car}}" name="idvehiculo[]" id="idvehiculo"class="form-control" readonly> <select name="pro_id[]" id="pro_id" class="selectpicker form-control border border-warning border-gradient border-gradient" style="background-color:whitesmoke">'
+    // Aquí se realiza la llamada AJAX para obtener los productos desde la BD
+    $.ajax({
+        url: '/productos', // Ruta que devuelve los productos desde el backend
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            newtr += '<option value="Mecanica General"><b>Mecanica General</b></option>'
+            newtr += '<option value="Servicio Eléctrico"><b>Servicio Eléctrico</b></option>'
+            newtr += '<option value="Cambio Aceite"><b>Cambio Aceite</b></option>'
+            newtr += '<option value="Lavado Vehiculo"><b>Lavado Vehiculo</b></option>'
+            newtr += '</select></td>';
           
-           
-    
-   
-           
-            function Calcular(ele) {
+            newtr += '<td><input class="form-control border border-success border-gradient border-gradient" type="text" id="concept[]" name="concept[]"/></td>';
+                 newtr += '<td><select class="form-control border border-success border-gradient border-gradient" id="productoinv[]" name="productoinv[]" onchange="obtenerValorProducto(this)"';
+                 newtr += '<option value="0">Seleccione un producto</option>';
+                 data.forEach(function(producto) {
+                 newtr += '<option value="' + producto.id + '">' + producto.descripcionproducto + '</option>';
+             });
+            
+            newtr += '</select></td>';
+            newtr += '<td><input class="form-control border border-success border-gradient border-gradient" type="text" min="0" id="precunit[]" name="precunit[]" onChange="Calcular(this);" readonly/></td>';
+            newtr += '<td><input class="form-control border border-success border-gradient border-gradient" type="number" min="1" id="cantidad[]" name="cantidad[]" onChange="Calcular(this);" /></td>';
+            newtr += '<td><input class="form-control border border-success border-gradient border-gradient" type="text" id="totalitem[]" name="totalitem[]" readonly /></td>';
+            newtr += '<td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa fa-times" title="Borrar Fila"></i></button> <button type="button" onclick="agregarProducto()" class="btn btn-primary btn-sm" title="Agregar Fila"><i class="fa fa-plus"></i></button></td></tr>';
+
+            $('#ProSelected').append(newtr); // Agrego el Producto al tbody de la Tabla con el id=ProSelected
+            RefrescaProducto(); // Refresco Productos
+            setTimeout(function() {
+                var selectProducto = $('#ProSelected tr:last-child').find('#productoinv[]');
+                var primerProductoId = selectProducto.val();  // Obtener el valor del primer producto
+                
+                if (primerProductoId && primerProductoId != "0") {
+                    // Llamada Ajax para obtener el valor del primer producto
+                    obtenerValorProducto(selectProducto[0]);
+                }
+            }, 100);
+            $('.remove-item').off().click(function(e) {
+                location.reload(true);
+                var total = document.getElementById("total");
+                total.innerHTML = parseFloat(total.innerHTML) - parseFloat(this.parentNode.parentNode.childNodes[3].childNodes[0].value);
+                document.getElementById('cost').value = total.innerHTML; 
+                $(this).parent('td').parent('tr').remove(); //Accion para eliminar el Producto de la Tabla Dinamica.
+                if ($('#ProSelected tr.item').length == 0) $('#ProSelected .no-item').slideDown(300);
+                $('#abono').val('');
+                $('#resta').val('');
+                RefrescaProducto();
+                Calcular(e.target);
+            });
+
+            $('.iProduct').off().change(function(e) {
+                RefrescaProducto();
+            });
+        },
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
+
+
+}
+
+function obtenerValorProducto(selectElement) {
+    // Obtener el ID del producto seleccionado
+    var productoId = $(selectElement).val();
+
+    // Obtener el elemento de precio correspondiente en la misma fila
+    var fila = $(selectElement).closest('tr'); // Encuentra la fila que contiene el select
+    var precunitInput = fila.find('input[name="precunit[]"]'); // Busca el campo precunit dentro de esa fila
+
+    // Verificar que un producto haya sido seleccionado
+    if (productoId) {
+        $.ajax({
+            url: '/producto/' + productoId,  // Ruta para obtener el valor del producto
+            type: 'GET',
+            success: function(data) {
+                // Actualizar el campo precunit con el valor obtenido
+                precunitInput.val(data.valorventacomercial);
+            },
+            error: function(error) {
+                console.log('Error:', error);
+            }
+        });
+    } else {
+        // Si no hay producto seleccionado, limpiar el campo precunit
+        precunitInput.val('');
+    }
+}
+
+                function Calcular(ele) {
                 $('#registrar').attr('disabled', false);
                 var cantidad = 0, precunit = 0, totalitem = 0 ;
                 var tr = ele.parentNode.parentNode;
@@ -222,6 +277,7 @@
                    }
                     if (nodes[x].firstChild.id == 'precunit[]') {
                         precunit = parseFloat(nodes[x].firstChild.value,10);
+                        console.log();
                     }
                     if (nodes[x].firstChild.id == 'totalitem[]') {
                         anterior = nodes[x].firstChild.value;
@@ -242,6 +298,8 @@
                      
            }
    
+           
+ 
    
           function RefrescaProducto() {
                 var ip = [];
@@ -260,6 +318,8 @@
                 var ipt = JSON.stringify(ip); //Convierto la Lista de Productos a un JSON para procesarlo en tu controlador
                 $('#ListaPro').val(encodeURIComponent(ipt));
             }
+            // Función para cargar el valor del primer producto al cargar la página
+
    </script>
 </body>
 

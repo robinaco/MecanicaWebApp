@@ -38,7 +38,7 @@ use App\Models\Liquidation;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\searchTecnico;
-
+use App\Models\Product;
 
 
 class HomeController extends Controller
@@ -898,77 +898,83 @@ public function Addorder($id)
     }
 
 
+    
+
     public function SaveNewLatoneria(Request $request, $id){
-        try {
+        DB::beginTransaction(); // Iniciar transacción
+           try {
+            // Obtener el inventario actual del producto usando su ID
             $inventario = inventario::find($id);
-            $vractual=$inventario ->valorcosto;
-            $vradd=$request->costo;
-            $acumulado=$vractual+$vradd;
-            $inventario->valorcosto=$acumulado;
-            $vabonoactual=$inventario->valorabono;
-            if($vabonoactual!=""){
-                $inventario->valorrestante=$acumulado-$vabonoactual;
-            }else{
-                $inventario->valorrestante=$acumulado-0;
-            }
-            $ndescripcion=$request->descripcion;
-            $text = preg_replace( "/<br>|\n/", "", $ndescripcion );
-            $inventario->Descripcionactividad=$text;
-           
+            $vractual = $inventario->valorcosto;
+            $vradd = $request->costo;
+            $acumulado = $vractual + $vradd;
+            $inventario->valorcosto = $acumulado;
+    
+            // Calcular valor restante
+            $vabonoactual = $inventario->valorabono;
+            $inventario->valorrestante = $vabonoactual ? $acumulado - $vabonoactual : $acumulado;
+    
+            // Limpiar la descripción
+            $ndescripcion = $request->descripcion;
+            $text = preg_replace("/<br>|\n/", "", $ndescripcion);
+            $inventario->Descripcionactividad = $text;
+    
+            // Guardar el inventario actualizado
             $inventario->save();
-            
-            if($inventario){
-                $i = 0;
-                foreach ($request['idvehiculo'] as $vh) {
-                    $items[$i]['idvehiculo'] = $vh;
-                    $i++;
+    
+            // Procesar los productos y cantidades de la orden
+            if ($inventario) {
+                $items = [];
+                foreach ($request['idvehiculo'] as $i => $vh) {
+                    // Obtener los datos del producto y la cantidad
+                    $productoinv = $request['productoinv'][$i];
+                    $cantidad = $request['cantidad'][$i];
+                    
+                    // Buscar el inventario correspondiente al producto
+                    $producto_inventario = Product::find($productoinv);
+                    
+
+                    
+                    // Verificar si hay suficiente inventario
+                    if ($producto_inventario->cantidadproducto >= $cantidad) {
+                        // Restar la cantidad al inventario
+                        $producto_inventario->cantidadproducto -= $cantidad;
+                        $producto_inventario->save(); // Guardar inventario actualizado
+    
+                        // Guardar los datos del item
+                        $items[] = [
+                            'idvehiculo' => $vh,
+                            'ordenl' => $request['odsl'][$i],
+                            'descripcionservicio' => $request['pro_id'][$i],
+                            'cantidad' => $cantidad,
+                            'preciounidad' => $request['precunit'][$i],
+                            'subtotal' => $request['totalitem'][$i],
+                            'conceptoservicio' => strtoupper($request['concept'][$i]),
+                        ];
+                    } else {
+                        // Si no hay suficiente inventario, lanzar excepción y deshacer la transacción
+                        throw new \Exception('No hay suficiente inventario para el producto: ' . $producto_inventario->nombre);
+                    }
                 }
-                $j = 0;
-                foreach ($request['odsl'] as $orden) {
-                    $items[$j]['ordenl'] = $orden;
-                    $j++;
-                }
-                $s = 0;
-                foreach ($request['pro_id'] as $serv) {
-                    $items[$s]['descripcionservicio'] = $serv;
-                    $s++;
-                }
-                $c = 0;
-                foreach ($request['cantidad'] as $cant) {
-                    $items[$c]['cantidad'] = $cant;
-                    $c++;
-                }
-                $pu = 0;
-                foreach($request['precunit'] as $price) {
-                    $items[$pu]['preciounidad'] = $price;
-                    $pu++;
-                }
-                $st = 0;
-                foreach ($request['totalitem'] as $stotal) {
-                    $items[$st]['subtotal'] = $stotal;
-                    $st++;
-                }
-                $cs=0;
-                foreach ($request['concept'] as $conceptoservicios) {
-                    $items[$cs]['conceptoservicio'] = strtoupper($conceptoservicios);
-                    $cs++;
-                }
-                latonerias::insert(
-                    $items
-                );
+    
+                // Insertar los nuevos datos en la tabla de latonerías
+                latonerias::insert($items);
             }
-            $mensaje =  "La orden ha sido Actualizada.";
+    
+            // Mensaje de éxito
+            $mensaje = "La orden ha sido actualizada.";
             $tipo = "success";
-            DB::commit();
-            log::info('Registro Actualizado Correctamente.');
+            DB::commit(); // Confirmar transacción
+            Log::info('Registro Actualizado Correctamente.');
             return redirect('/OrdenesLatonerias')->with("mensaje", $mensaje)->with("tipo", $tipo);
+    
         } catch (\Throwable $th) {
-            DB::rollback();
-            Log::error('se presentó un error al grabar los datos', [$th]);
-            return  $th;
+            DB::rollback(); // Revertir transacción en caso de error
+            Log::error('Se presentó un error al grabar los datos', [$th]);
+            return response()->json(['error' => $th->getMessage()], 500);
         }
-        
     }
+
 
 
     public function SaveLatoneria(StorePostServiceLatoneria $request)

@@ -275,8 +275,8 @@ $abonovalue=0;
                                     <th scope="col" class="numeric text-center">ITEM</th>
                                     <th scope="col" class="numeric text-center">FECHA REGISTRO</th>
                                     <th scope="col" class="numeric text-center">SERVICIO REALIZADO</th>
-                                    <th scope="col" class="numeric text-center">DESCRIPCION SERVICIO</th>
-                                    <th scope="col" class="numeric text-center">CANTIDAD</th>
+                                    <th scope="col" class="numeric text-center">DESCRIPCION SERVICIO REALIZADO</th>
+                                    <!-- <th scope="col" class="numeric text-center">CANTIDAD</th> -->
                                     <th scope="col" class="numeric text-center">VALOR SERVICIO</th>
                                     <th scope="col" class="numeric text-center">SUBTOTAL</th>
                                 </tr>
@@ -296,9 +296,9 @@ $abonovalue=0;
                                     <td class="text-center" data-title="placa">
                                         <b>{!!$item->conceptoservicio !!}</b>
                                     </td>
-                                    <td class="text-center numeric" data-title="date">
+                                    <!-- <td class="text-center numeric" data-title="date">
                                         {!!$item->cantidad!!}
-                                </td>
+                                    </td> -->
                                     <td data-title="description" class="text-right numeric bg bg-default">@php echo
                                          number_format($item->preciounidad ,0);@endphp</td>
                                     <td data-title="description" class="text-right numeric bg bg-default">@php echo
@@ -311,7 +311,6 @@ $abonovalue=0;
                                 @endphp
                                 @endforeach
                                 <tr>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

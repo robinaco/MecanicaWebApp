@@ -49,7 +49,7 @@ class ProductController extends Controller
             $product = new Product();
             $product->categoriaproducto = strtoupper($request->categoriaproduct);
             $product->codigoproducto = strtoupper($request->codigo);
-            $product->descripcionproducto = strtolower($request->descripcionproducto);
+            $product->descripcionproducto = strtoupper($request->descripcionproducto);
             $product->valornetounidad = ($request->valorcompraproducto);
             $product->cantidadproducto = ($request->cantidadproducto);
             $product->valorventacomercial = ($request->valorventaproducto);
@@ -114,6 +114,23 @@ class ProductController extends Controller
             return  $th;
         }
     }
+    public function getProductos()
+    {
+        $productos = product::where('estado', 1)->where('cantidadproducto', '>', 0)->orderBy('descripcionproducto', 'desc')->get(); // Obtener productos de la base de datos
+        return response()->json($productos); // Retornar en formato JSON
+    }
+
+    public function getProductoValor($id)
+    {
+        // Buscar el producto por su ID
+        $producto = Product::find($id);
+        // Si el producto no existe, retornar un error
+        if (!$producto) {
+            return response()->json(['error' => 'Producto no encontrado'], 404);
+        }
+        // Retornar el valor del producto
+        return response()->json(['valorventacomercial' => $producto->valorventacomercial]); // Cambia 'valor' por el campo que necesites
+    }
 
 
     public function UpdateProduct(StoreProductRequest $request, $id)
@@ -122,7 +139,7 @@ class ProductController extends Controller
           
             $product = product::find($id);
             $product->categoriaproducto = strtoupper($request->categoriaproduct);
-            $product->descripcionproducto= strtolower($request->descripcionproducto);
+            $product->descripcionproducto= strtoupper($request->descripcionproducto);
             $product->valornetounidad = ($request->valorcompraproducto);
             $product->cantidadproducto = ($request->cantidadproducto);
             $product->valorventacomercial= ($request->valorventaproducto);

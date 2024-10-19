@@ -83,8 +83,7 @@ Route::post('/SaveProduct', [App\Http\Controllers\ProductController::class, 'Sav
 Route::get('/{id}/deleteProduct', [App\Http\Controllers\ProductController::class, 'deleteProduct'])->name('deleteProduct');
 Route::get('/{id}/editProduct', [App\Http\Controllers\ProductController::class, 'editProduct'])->name('editProduct');
 Route::put('/{id}/UpdateProduct', [App\Http\Controllers\ProductController::class, 'UpdateProduct'])->name('UpdateProduct');
-
-
-
+Route::get('/productos', [App\Http\Controllers\ProductController::class, 'getProductos'])->name('getProductos');
+Route::get('/producto/{id}', [App\Http\Controllers\ProductController::class, 'getProductoValor'])->name('getProductoValor');
 
 Auth::routes();

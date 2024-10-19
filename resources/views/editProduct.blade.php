@@ -13,7 +13,7 @@
 </head>
 <body>
     
-<h4 class="text-black-50 text-center"><span class="badge badge bg-secondary bg-gradient">Actualizar Información</span></h4>
+<h4 class="text-black-50 text-center"><span class="badge badge bg-secondary bg-gradient">Actualizar Información Producto Inventario</span></h4>
 
 <a href="/ProductList" class="btn btn-secondary btn-sm"> << Atras</a>
 <hr>
@@ -22,7 +22,6 @@
 @include("advertisement")
 <div class="card bg-ligth bg-gradient border border-secondary">
     <div class="card-body">
-        <h1><span class="badge badge-secondary"><i class="nav-icon fas fa-tools"></i></span></h1>
         <i><span class="badge bg-danger bg-gradient">Campos marcados con * son obligatorios.</span></i>
         <div class="card border border-secondary mb-3" style="padding:1%">
             <form class="row g-3" action="UpdateProduct" method="POST">

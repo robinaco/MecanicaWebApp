@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle Tecnico</title>
+    <title>Resumen Ventas</title>
     <style>
         table {
                 width: 96%;
@@ -83,12 +83,12 @@ echo date('Y-m-d');
 
 <div class="margen">
     
-        <p class="text-center">
-            <b>JE Car Pro</b> <br>
-             Direccion: cra  91  # 44c - 65 <br>
-             Celular: 3216793525<br>
-             Medellin - Antioquia
-        </p>
+<p class="text-center">
+        <b>Omar Castaño</b> <br>
+         Direccion: calle 36 # 53B - 43<br>
+         Celular: 3046578518<br>
+         Itagui - Antioquia
+    </p>
    
     <hr>                
     <h5 class="textos">Reporte Ingresos Taller<br> </h5>

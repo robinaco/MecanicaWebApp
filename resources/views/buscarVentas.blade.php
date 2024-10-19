@@ -12,8 +12,8 @@
     <title>Buscar Ingresos</title>
 </head>
 <body>
-    <h4 class="text-black-50 text-center"><span class="badge badge bg-secondary bg-gradient">Buscar Ventas Taller</span></h4>
-
+    <h4 class="text-black-50 text-center"><span class="badge badge bg-secondary bg-gradient">Buscar Ingresos Taller</span></h4>
+<hr>
 <div class="container">
 
     <div class="card bg-ligth bg-gradient border border-secondary">
