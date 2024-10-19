@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div id="no-more-tables">
-                    <table class="col-md-12 table-hoover table-condensed" id="liquidaciones">
+                    <table class="col-md-12 table-hoover table-striped table-bordered"  id="liquidaciones">
                         <thead class="cf">
                             <tr>
                                 <th scope="col" class="numeric">ITEM</th>

@@ -18,7 +18,7 @@
         }
         .history{
 
-            background-color: whitesmoke;
+            background-color: white;
         }
     </style>
 </head>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div id="no-more-tables">
-                <table class="col-md-12 table-hoover table-condensed cf" id="latonerias">
+                <table class="col-md-12 table-hoover table-striped table-bordered cf" id="latonerias">
                     <thead class="cf">
                         <tr>
                             <th scope="col" class="numeric">ITEM</th>

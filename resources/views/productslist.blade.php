@@ -16,7 +16,7 @@
             max-width: 90%;
         }
         .history{
-            background-color: whitesmoke;
+            background-color: white;
         }
 
     </style>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div id="no-more-tables">
-                <table class="col-md-12 table-hoover table-condensed cf" id="products">
+                <table class="col-md-12 table-hoover table-bordered table-striped  cf" id="products">
                     <thead class="cf thead-dark">
                         <tr>
                             <th>Cod. Producto</th>

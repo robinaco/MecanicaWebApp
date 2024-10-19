@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div id="no-more-tables">
-                <table class="col-md-12 table-hoover table-condensed cf" id="latonerias">
+                <table class="col-md-12 table-hoover table-striped table-bordered cf" id="latonerias">
                     <thead class="cf">
                         <tr>
                             <th scope="col" class="numeric">ITEM</th>
@@ -66,7 +66,7 @@
                                 Visualizar</a>
                                 <a href="/{{ $item->id }}/addItems" class="btn btn-warning btn-sm" title="Agregar Servicios a Orden"><span
                                     class="fas fa-plus"></span>
-                                Agregar</a>
+                                Agregar Items</a>
                                
                                     <a href="/{{ $item->id }}/liquidorder" class="btn btn-success btn-sm" title="Liquidar Orden Mecanico"><span
                                         class="fas fa-money-bill"></span>

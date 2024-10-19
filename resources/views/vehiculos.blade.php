@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div id="no-more-tables">
-                <table class="col-md-12  table-hoover table-condensed cf" id="vehiculos">
+                <table class="col-md-12  table-hoover table-bordered table-striped cf" id="vehiculos">
                     <thead class="cf">
                         <tr>
                             <th scope="col" class="numeric">PLACA</th>
@@ -67,7 +67,7 @@
                             <td class="numeric" data-title="Acciones">
                                 
                                <a href="/{{ $item->id }}/Addorder" class="btn btn-warning btn-sm"><span
-                                        class="fas fa-car-crash"></span> Add Orden</a>
+                                        class="fas fa-car-crash"></span> Add Pre_Orden</a>
                                 
                                 <a href="/{{ $item->id }}/Editvh" class="btn btn-success btn-sm"><span
                                         class="fas fa-pen"></span>

@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div id="no-more-tables">
-                <table class="col-md-12 table-hoover table-condensed cf" id="clientes">
+                <table class="col-md-12 table-hoover  table-bordered table-striped cf" id="clientes">
                     <thead class="cf thead-dark">
                         <tr>
                             <th># DOCUMENTO</th>

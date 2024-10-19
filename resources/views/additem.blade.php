@@ -194,7 +194,7 @@ function agregarProducto() {
                  newtr += '<td><select class="form-control border border-success border-gradient border-gradient" id="productoinv[]" name="productoinv[]" onchange="obtenerValorProducto(this)"';
                  newtr += '<option value="0">Seleccione un producto</option>';
                  data.forEach(function(producto) {
-                 newtr += '<option value="' + producto.id + '">' + producto.descripcionproducto + '</option>';
+                 newtr += '<option value="' + producto.id + '">' + producto.codigoproducto + " _ _ " + producto.descripcionproducto + '</option>';
              });
             
             newtr += '</select></td>';

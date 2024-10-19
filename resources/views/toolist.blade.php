@@ -16,7 +16,7 @@
             max-width: 90%;
         }
         .history{
-            background-color: whitesmoke;
+            background-color: white;
         }
 
     </style>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div id="no-more-tables">
-                <table class="col-md-12 table-hoover table-condensed cf" id="tools">
+                <table class="col-md-12 table-hoover table-striped table-bordered cf" id="tools">
                     <thead class="cf thead-dark">
                         <tr>
                             <th># ID Registro</th>
